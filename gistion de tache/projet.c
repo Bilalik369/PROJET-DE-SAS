@@ -90,11 +90,11 @@ void ajouter_tache() {
 
     tache nouvelle_tache;
     printf("Titre : ");
-    scanf(" %[^\n]", nouvelle_tache.titre); // Correction ici: ajout d'un espace avant % pour ignorer les espaces
+    scanf(" %[^\n]", nouvelle_tache.titre); 
     printf("Description : ");
-    scanf(" %[^\n]", nouvelle_tache.description); // Correction ici: ajout d'un espace avant % 
+    scanf(" %[^\n]", nouvelle_tache.description);
     printf("Date d'échéance (YYYY-MM-DD) : ");
-    scanf(" %[^\n]", nouvelle_tache.date); // Correction ici: usage de "date" au lieu de "date_echance"
+    scanf(" %[^\n]", nouvelle_tache.date); 
     
     int input_priorite;
     printf("Priorité (1 pour HIGH, 0 pour LOW) : ");
@@ -120,4 +120,67 @@ void afficher_taches() {
         printf("Priorité : %s\n", taches[i].priorite == HIGH ? "HIGH" : "LOW"); 
     }
 }
+void modifier_tache() {
+    int index;
+    afficher_taches();
+    printf("Entrez le numéro de la tâche à modifier : ");
+    scanf("%d", &index);
+
+    if (index < 1 || index > compteur_taches) {
+        printf("Numéro de tâche invalide.\n");
+        return;
+    }
+    
+    index--;
+    printf("Nouveau titre : ");
+    char nouveau_titre[TITRE_LONGUEUR];
+    scanf(" %[^\n]", nouveau_titre);
+    if (strlen(nouveau_titre) > 0) {
+        strcpy(taches[index].titre, nouveau_titre);
+    }
+    
+    printf("Nouvelle description : ");
+    char nouveau_description[DESCRIPTION_LONGUEUR];
+    scanf(" %[^\n]", nouveau_description);
+    if (strlen(nouveau_description) > 0) {
+        strcpy(taches[index].description, nouveau_description);
+    }
+    
+    printf("Nouvelle date d'échéance : ");
+    char nouveau_date[11];
+    scanf(" %[^\n]", nouveau_date);
+    if (strlen(nouveau_date) > 0) {
+        strcpy(taches[index].date, nouveau_date);
+    }
+    
+    int input_priorite;
+    printf("Nouvelle priorité (1 pour HIGH, 0 pour LOW) : ");
+    scanf("%d", &input_priorite);
+    if (input_priorite == 1) {
+        taches[index].priorite = HIGH;
+    } else if (input_priorite == 0) {
+        taches[index].priorite = LOW;
+    }
+    printf("Tâche modifiée avec succès\n");
+}
+
+void supprimer_tache() {
+    int index;
+    afficher_taches();
+    printf("Entrez le numéro de la tâche à supprimer : ");
+    scanf("%d", &index);
+    
+    if (index < 1 || index > compteur_taches) {
+        printf("Numéro de tâche invalide\n");
+        return;
+    }
+
+    index--;
+    for (int i = index; i < compteur_taches - 1; i++) {
+        taches[i] = taches[i + 1];
+    }
+    compteur_taches--;
+    printf("Tâche supprimée avec succès!\n");
+}
+
 
