@@ -61,3 +61,63 @@ int main() {
     printf("5. Filtrer les tâches\n");
     printf("6. Quitter\n");
 }
+
+void ajouter_tache() {
+    if (compteur_taches >= MXA_TACHE) { 
+        printf("Le nombre maximum de tâches a été atteint.\n");
+        return; 
+    }
+
+    tache nouvelle_tache;
+    printf("Titre : ");
+    scanf(" %[^\n]", nouvelle_tache.titre); 
+    printf("Description : ");
+    scanf(" %[^\n]", nouvelle_tache.description); 
+    printf("Date d'échéance (YYYY-MM-DD) : ");
+    scanf(" %[^\n]", nouvelle_tache.date); 
+    
+    int input_priorite;
+    printf("Priorité (1 pour HIGH, 0 pour LOW) : ");
+    scanf("%d", &input_priorite);
+    nouvelle_tache.priorite = (input_priorite == 1) ? HIGH : LOW; 
+    
+    taches[compteur_taches++] = nouvelle_tache; 
+    printf("Tâche ajoutée avec succès \n");
+}
+
+
+    }
+
+    tache nouvelle_tache;
+    printf("Titre : ");
+    scanf(" %[^\n]", nouvelle_tache.titre); // Correction ici: ajout d'un espace avant % pour ignorer les espaces
+    printf("Description : ");
+    scanf(" %[^\n]", nouvelle_tache.description); // Correction ici: ajout d'un espace avant % 
+    printf("Date d'échéance (YYYY-MM-DD) : ");
+    scanf(" %[^\n]", nouvelle_tache.date); // Correction ici: usage de "date" au lieu de "date_echance"
+    
+    int input_priorite;
+    printf("Priorité (1 pour HIGH, 0 pour LOW) : ");
+    scanf("%d", &input_priorite);
+    nouvelle_tache.priorite = (input_priorite == 1) ? HIGH : LOW; 
+    
+    taches[compteur_taches++] = nouvelle_tache; 
+    printf("Tâche ajoutée avec succès \n");
+}
+
+void afficher_taches() {
+    if (compteur_taches == 0) {
+        printf("Aucune tâche à afficher.\n");
+        return;
+    }
+
+    printf("\n========= Liste des tâches =========\n");
+    for (int i = 0; i < compteur_taches; i++) {
+        printf("Tâche %d :\n", i + 1);
+        printf("Titre : %s\n", taches[i].titre); 
+        printf("Description : %s\n", taches[i].description);
+        printf("Date d'échéance : %s\n", taches[i].date);
+        printf("Priorité : %s\n", taches[i].priorite == HIGH ? "HIGH" : "LOW"); 
+    }
+}
+
