@@ -54,9 +54,9 @@ int main(){
 			break;
 			case 5: filtrer_taches;
 			break;
-			case 6: trier_taches; // option paur trier les taches
+			case 6: trier_taches; // option pour trier les taches
 			break;
-			case 7: sauvegarder_donnees; // option paur sauvgarde les donnes 
+			case 7: sauvegarder_donnees; // option pour sauvgarde les donnes 
 			break;
 			case 8: printf("Au revoir :\n");
 			default: printf("Choix invalide !\n");
@@ -189,5 +189,24 @@ void supprimer_tache(){
 	compteur_taches--;
 	printf("tache supprimer avec succe.\n");
 	
+}
+void filtrer_taches(){
+	int input_periorite;
+	printf("filtrer par periorite (1 pour HIGH, 0 pour LOW)");
+	scanf("%d", &input_periorite);
+	Periorite periorite_filtre = (input_periorite == 1)? HIGH: LOW;
+	printf("\n=== Tâches Filtrées ===\n");
+	for( int = 0; i < compteur_taches; i++){
+	
+	if(taches[i].periorite == periorite_filtre){
+		printf("Tache :\n", i + 1);
+		printf("Titre :%s\n",taches[i].titre);
+		printf("Description :%s\n", taches[i].description);
+		pritf("Date d'echaence :%s\n"; taches[i].date);
+		printf("Periorite :%s\n", taches[i].periorite == HIGH ? "HIGH","LOW");
+		printf("Statut : %s\n" taches[i].statut == COMPLIT ? "COMPLIT" , "INCOMPLIT");
+		
+	}
+   }	
 }
 
