@@ -20,7 +20,7 @@ typedef struct {
 }Tache;
 
 Tache taches[MAX_TACHE];
-int compteur_tachesc = 0;
+int compteur_taches = 0;
 
 void ajouter_tache(); 
 void afficher_taches();
@@ -80,5 +80,49 @@ int main(){
 		
 	}
 	
+	void ajouter_tache(){
+		if(compteur_taches >= MAX_TACHE){
+		printf("Le nombre maxumim des taches a ete attient .\n");
+	    return ;
+		}
+		Tache nouvelle_tache;
+		printf("Titre :");
+		scanf(" %[^\n]" , nouvelle_tache.titre);
+		printf("Descriprion :");
+		scanf(" %[^\n]" , nouvelle_tache.description);
+		printf("Date d'échance (YYYY-MM-DD)").
+		scanf(" %[^\n]", nouvelle_tache.date);
+		
+		
+		int input_periorite;
+		printf("Periorite (1 pour HIGH , 0 pour LOW)").
+		scanf("%d", &input_periorite);
+		nouvelle_tache.periorite = (input_periorite == 1) ? HIGH : LOW;
+		
+		int input_statut;
+		printf("Statut (1 pour COMPLIT, 0 pour INCOMPLIT)");
+		scanf("%d", &input_statut);
+		nouvelle_tache.statut = (input_statut == 1) ? COMPLIT : INCOMPLIT;
+		taches[compteur_taches++] = nouvelle_tache
+		printf("Tache ajouter avec succes .\n");
+		
+		
+	}
+	void afficher_taches(){
+		if (compteur_taches == 0){
+			printf("Accune tache a afficher");
+			return;
+		}
+		printf("==========Liste des tâches==========");
+		
+		for(i = 0; i < compteur_taches;i++); {
+		printf("Tache :\n", i + 1);
+		printf("Titre :%s\n", taches[i].titre)
+		printf("Description:%s\n", taches[i].description);
+		printf("Date d'échance: %s\n", taches[i].date);
+		printf("Periorite:%s\n", taches[i].periorite == HIGH ? "HIGH" : "LOW");
+		printf("Statut:%s\n", taches[i].statut == COMPLIT ? "COMPLITE" : "INCOMPLET");
+		}
+	}
 
 
