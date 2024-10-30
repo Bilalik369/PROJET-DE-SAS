@@ -210,3 +210,19 @@ void filtrer_taches(){
    }	
 }
 
+void trier_taches(){
+	 	for(int i = 0 ; i < compteur_taches - 1; i++){
+	 		for(int j = 0; j < compteur_taches - i - 1 ; i++){
+	 			if(strcmp(taches[j].date , taches[j + 1].date > 0)){
+	 				tache temp = tache[j];
+	 				tache[j] = tache[j + 1];
+	 				tache[j + 1] = temp;
+	 				
+				 }
+			 }
+		 }
+	 	printf("Taches triees par date avec succuee .\n");
+	 	
+}
+
+
