@@ -124,5 +124,51 @@ int main(){
 		printf("Statut:%s\n", taches[i].statut == COMPLIT ? "COMPLITE" : "INCOMPLET");
 		}
 	}
-
+void modifier_tache(){
+	int index;
+	afficher_taches();
+	printf("Entre le numero de tache a modifier .\n");
+	scanf("%d", &index)
+	
+	if(index < 1 || index > compteur_taches){
+		printf("le numero de tache invalide.\n");
+		return;
+	}
+	index--;
+	char nouveau_titre[TITRE_LENGUEUR]
+	printf("Nouveau titre : ");
+	scanf("%[^\n]", nouveau_titre);
+	if(strlen(nouveau_titre) > 0) {
+		strcpy(taches[index].titre, nouveau_titre);
+	}
+	printf("nouvelle description : ");
+	char nouveau_description[MAX_DESCRIPTION];
+	scanf("%[^\n]", nouveau_description);
+	if(strlen(nouveau_description) > 0){
+		strcpy(taches[index].description, nouveau_description);
+	}
+	printf("Nouvelle date d'écheance : ");
+	char nouveau_date;
+	scanf("%[^\n]", nouveau_date);
+	if(strlen(nouveau_date) > 0){
+	strcpy(taches[index].date, nouveau_date);
+	}
+	int input_periorite;
+	printf("Nouvelle periorite (1 pour HIGH, 0 pour LOW )");
+	scanf("%d",&input_periorite);
+	if(input_periorite == 1){
+		taches[index].periorite = HIGH; 
+	}else if(input_periorite = 0){
+		taches[index].description = LOW;
+	}
+	int input_statut;
+	printf("Nouvelle statut(1 pour COMPLIT , 0 pour INCOMPLIT)");
+	scanf("%d" ,&input_input_statut);
+	if(input_statut = 1){
+		taches[index].statut = COMPLIT;
+	}else if(input_statut = 0){
+		taches[index].statut = INCCOMPLIT;
+	}
+	printf("Tache modifie avec succes .\n");
+}
 
