@@ -60,11 +60,25 @@ int main(){
 			break;
 			case 8: printf("Au revoir :\n");
 			default: printf("Choix invalide !\n");
-			
+		}
 			
 		}while (choix != 8);
 		return 0;
 		
 	}
-}
+	
+	void afficher_menu(){
+		printf("\n===========MENU DE GISTION DES TACHES==========\n");
+		printf("1 . Ajouter une tache \n");
+		printf("2 . Afficher les taches \n");
+		printf("3 . Modifier une tache \n");
+		printf("4 . Supprimer une tache \n");
+		printf("5 . Filtrer les taches \n ");
+		printf("6 . Ordoner les taches par date \n");
+		printf("7 . Sauvgarder les donnees\n");
+		printf("8 . Quitter \n");
+		
+	}
+	
+
 
