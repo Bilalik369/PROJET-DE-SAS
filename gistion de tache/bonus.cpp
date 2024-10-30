@@ -2,22 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-
-#difine MAX_TACHE 100
-#difine TITRE_LENGUEUR 100
+#define MAX_TACHE 100
+#define TITRE_LONGUEUR 100
 #define MAX_DESCRIPTION 500
 
-
-typedef enum {COMPLIT , INCOMPLIT}Statut;
-typedef enum {HIGH , LOW}Periorite;
+typedef enum { COMPLET, INCOMPLET } Statut;
+typedef enum { HIGH, LOW } Priorite;
 
 typedef struct {
-	char titre[TITRE_LENGUEUR];
-	char description[MAX_DESCRIPTION];
-	char date[11];  //format de (YYYY-MM-DD)
-	Periorite periorite;
-	Statut statut;
-}Tache;
+    char titre[TITRE_LONGUEUR];
+    char description[MAX_DESCRIPTION];
+    char date[11];  // format de (YYYY-MM-DD)
+    Priorite priorite;
+    Statut statut;
+} Tache;
 
 Tache taches[MAX_TACHE];
 int compteur_taches = 0;
@@ -27,202 +25,210 @@ void afficher_taches();
 void modifier_tache();
 void supprimer_tache();
 void filtrer_taches();
-void trier_taches();   // declaration de la nouvelle fonction pour traie les taches 
+void trier_taches();   // déclaration de la nouvelle fonction pour trier les tâches 
 void afficher_menu();
-void sauvegarder_donnees(); // declaration de la nouvelle fonction sauvegarde des  donnes 
+void sauvegarder_donnees(); // déclaration de la nouvelle fonction de sauvegarde des données 
 
+int main() {
+    int choix;
 
-int main(){
-	
-	
-	
-	int choix;
-	
-	do{
-		afficher_menu;
-		printf("Choisier une option");
-		scanf("%d", &chiox);
-		
-		switch(choix) {
-			case 1: ajouter_tache;
-			break;
-			case 2: afficher_taches;
-			break;
-			case 3: modifier_tache;
-			break;
-			case 4: supprimer_tache;
-			break;
-			case 5: filtrer_taches;
-			break;
-			case 6: trier_taches; // option pour trier les taches
-			break;
-			case 7: sauvegarder_donnees; // option pour sauvgarde les donnes 
-			break;
-			case 8: printf("Au revoir :\n");
-			default: printf("Choix invalide !\n");
-		}
-			
-		}while (choix != 8);
-		return 0;
-		
-	}
-	
-	void afficher_menu(){
-		printf("\n===========MENU DE GISTION DES TACHES==========\n");
-		printf("1 . Ajouter une tache \n");
-		printf("2 . Afficher les taches \n");
-		printf("3 . Modifier une tache \n");
-		printf("4 . Supprimer une tache \n");
-		printf("5 . Filtrer les taches \n ");
-		printf("6 . Ordoner les taches par date \n");
-		printf("7 . Sauvgarder les donnees\n");
-		printf("8 . Quitter \n");
-		
-	}
-	
-	void ajouter_tache(){
-		if(compteur_taches >= MAX_TACHE){
-		printf("Le nombre maxumim des taches a ete attient .\n");
-	    return ;
-		}
-		Tache nouvelle_tache;
-		printf("Titre :");
-		scanf(" %[^\n]" , nouvelle_tache.titre);
-		printf("Descriprion :");
-		scanf(" %[^\n]" , nouvelle_tache.description);
-		printf("Date d'échance (YYYY-MM-DD)").
-		scanf(" %[^\n]", nouvelle_tache.date);
-		
-		
-		int input_periorite;
-		printf("Periorite (1 pour HIGH , 0 pour LOW)").
-		scanf("%d", &input_periorite);
-		nouvelle_tache.periorite = (input_periorite == 1) ? HIGH : LOW;
-		
-		int input_statut;
-		printf("Statut (1 pour COMPLIT, 0 pour INCOMPLIT)");
-		scanf("%d", &input_statut);
-		nouvelle_tache.statut = (input_statut == 1) ? COMPLIT : INCOMPLIT;
-		taches[compteur_taches++] = nouvelle_tache
-		printf("Tache ajouter avec succes .\n");
-		
-		
-	}
-	void afficher_taches(){
-		if (compteur_taches == 0){
-			printf("Accune tache a afficher");
-			return;
-		}
-		printf("==========Liste des tâches==========");
-		
-		for(i = 0; i < compteur_taches;i++); {
-		printf("Tache :\n", i + 1);
-		printf("Titre :%s\n", taches[i].titre)
-		printf("Description:%s\n", taches[i].description);
-		printf("Date d'échance: %s\n", taches[i].date);
-		printf("Periorite:%s\n", taches[i].periorite == HIGH ? "HIGH" : "LOW");
-		printf("Statut:%s\n", taches[i].statut == COMPLIT ? "COMPLITE" : "INCOMPLET");
-		}
-	}
-void modifier_tache(){
-	int index;
-	afficher_taches();
-	printf("Entre le numero de tache a modifier .\n");
-	scanf("%d", &index)
-	
-	if(index < 1 || index > compteur_taches){
-		printf("le numero de tache invalide.\n");
-		return;
-	}
-	index--;
-	char nouveau_titre[TITRE_LENGUEUR]
-	printf("Nouveau titre : ");
-	scanf("%[^\n]", nouveau_titre);
-	if(strlen(nouveau_titre) > 0) {
-		strcpy(taches[index].titre, nouveau_titre);
-	}
-	printf("nouvelle description : ");
-	char nouveau_description[MAX_DESCRIPTION];
-	scanf("%[^\n]", nouveau_description);
-	if(strlen(nouveau_description) > 0){
-		strcpy(taches[index].description, nouveau_description);
-	}
-	printf("Nouvelle date d'écheance : ");
-	char nouveau_date;
-	scanf("%[^\n]", nouveau_date);
-	if(strlen(nouveau_date) > 0){
-	strcpy(taches[index].date, nouveau_date);
-	}
-	int input_periorite;
-	printf("Nouvelle periorite (1 pour HIGH, 0 pour LOW )");
-	scanf("%d",&input_periorite);
-	if(input_periorite == 1){
-		taches[index].periorite = HIGH; 
-	}else if(input_periorite = 0){
-		taches[index].description = LOW;
-	}
-	int input_statut;
-	printf("Nouvelle statut(1 pour COMPLIT , 0 pour INCOMPLIT)");
-	scanf("%d" ,&input_input_statut);
-	if(input_statut = 1){
-		taches[index].statut = COMPLIT;
-	}else if(input_statut = 0){
-		taches[index].statut = INCCOMPLIT;
-	}
-	printf("Tache modifie avec succes .\n");
-}
-void supprimer_tache(){
-	int index;
-	afficher_taches();
-	printf("Entre le nemuro de tache a supprimer:");
-	scanf("%d", &index);
-	
-	if(index < 1 || index > compteur_taches){
-		printf("Numero de tache invalide ");
-		return;
-	}	
-	
-	index--;
-	for(int i = index ; i < compteur_tahes - 1){
-		taches[i] = taches[i + 1];
-	}
-	compteur_taches--;
-	printf("tache supprimer avec succe.\n");
-	
-}
-void filtrer_taches(){
-	int input_periorite;
-	printf("filtrer par periorite (1 pour HIGH, 0 pour LOW)");
-	scanf("%d", &input_periorite);
-	Periorite periorite_filtre = (input_periorite == 1)? HIGH: LOW;
-	printf("\n=== Tâches Filtrées ===\n");
-	for( int = 0; i < compteur_taches; i++){
-	
-	if(taches[i].periorite == periorite_filtre){
-		printf("Tache :\n", i + 1);
-		printf("Titre :%s\n",taches[i].titre);
-		printf("Description :%s\n", taches[i].description);
-		pritf("Date d'echaence :%s\n"; taches[i].date);
-		printf("Periorite :%s\n", taches[i].periorite == HIGH ? "HIGH","LOW");
-		printf("Statut : %s\n" taches[i].statut == COMPLIT ? "COMPLIT" , "INCOMPLIT");
-		
-	}
-   }	
+    do {
+        afficher_menu();
+        printf("Choisir une option: ");
+        scanf("%d", &choix);
+        
+        switch(choix) {
+            case 1: ajouter_tache(); break;
+            case 2: afficher_taches(); break;
+            case 3: modifier_tache(); break;
+            case 4: supprimer_tache(); break;
+            case 5: filtrer_taches(); break;
+            case 6: trier_taches(); break; // option pour trier les tâches
+            case 7: sauvegarder_donnees(); break; // option pour sauvegarder les données 
+            case 8: printf("Au revoir :\n"); break;
+            default: printf("Choix invalide !\n");
+        }
+    } while (choix != 8);
+    
+    return 0;
 }
 
-void trier_taches(){
-	 	for(int i = 0 ; i < compteur_taches - 1; i++){
-	 		for(int j = 0; j < compteur_taches - i - 1 ; i++){
-	 			if(strcmp(taches[j].date , taches[j + 1].date > 0)){
-	 				tache temp = tache[j];
-	 				tache[j] = tache[j + 1];
-	 				tache[j + 1] = temp;
-	 				
-				 }
-			 }
-		 }
-	 	printf("Taches triees par date avec succuee .\n");
-	 	
+void afficher_menu() {
+    printf("\n=========== MENU DE GESTION DES TACHES ===========\n");
+    printf("1. Ajouter une tâche \n");
+    printf("2. Afficher les tâches \n");
+    printf("3. Modifier une tâche \n");
+    printf("4. Supprimer une tâche \n");
+    printf("5. Filtrer les tâches \n");
+    printf("6. Ordonner les tâches par date \n");
+    printf("7. Sauvegarder les données \n");
+    printf("8. Quitter \n");
 }
 
+void ajouter_tache() {
+    if (compteur_taches >= MAX_TACHE) {
+        printf("Le nombre maximum de tâches a été atteint.\n");
+        return;
+    }
+    Tache nouvelle_tache;
+    printf("Titre : ");
+    scanf(" %[^\n]", nouvelle_tache.titre);
+    printf("Description : ");
+    scanf(" %[^\n]", nouvelle_tache.description);
+    printf("Date d'échéance (YYYY-MM-DD) : ");
+    scanf(" %[^\n]", nouvelle_tache.date);
+    
+    int input_priorite;
+    printf("Priorité (1 pour HIGH, 0 pour LOW) : ");
+    scanf("%d", &input_priorite);
+    nouvelle_tache.priorite = (input_priorite == 1) ? HIGH : LOW;
+    
+    int input_statut;
+    printf("Statut (1 pour COMPLET, 0 pour INCOMPLET) : ");
+    scanf("%d", &input_statut);
+    nouvelle_tache.statut = (input_statut == 1) ? COMPLET : INCOMPLET;
+    
+    taches[compteur_taches++] = nouvelle_tache;
+    printf("Tâche ajoutée avec succès.\n");
+}
+
+void afficher_taches() {
+    if (compteur_taches == 0) {
+        printf("Aucune tâche à afficher.\n");
+        return;
+    }
+    printf("========== Liste des tâches ========== \n");
+    
+    for (int i = 0; i < compteur_taches; i++) {
+        printf("Tâche %d :\n", i + 1);
+        printf("  Titre : %s\n", taches[i].titre);
+        printf("  Description : %s\n", taches[i].description);
+        printf("  Date d'échéance : %s\n", taches[i].date);
+        printf("  Priorité : %s\n", taches[i].priorite == HIGH ? "HIGH" : "LOW");
+        printf("  Statut : %s\n", taches[i].statut == COMPLET ? "COMPLET" : "INCOMPLET");
+    }
+}
+
+void modifier_tache() {
+    int index;
+    afficher_taches();
+    printf("Entrez le numéro de la tâche à modifier : ");
+    scanf("%d", &index);
+    
+    if (index < 1 || index > compteur_taches) {
+        printf("Numéro de tâche invalide.\n");
+        return;
+    }
+    
+    index--;
+    char nouveau_titre[TITRE_LONGUEUR];
+    printf("Nouveau titre : ");
+    scanf(" %[^\n]", nouveau_titre);
+    if (strlen(nouveau_titre) > 0) {
+        strcpy(taches[index].titre, nouveau_titre);
+    }
+
+    char nouveau_description[MAX_DESCRIPTION];
+    printf("Nouvelle description : ");
+    scanf(" %[^\n]", nouveau_description);
+    if (strlen(nouveau_description) > 0) {
+        strcpy(taches[index].description, nouveau_description);
+    }
+
+    char nouveau_date[11];
+    printf("Nouvelle date d'échéance : ");
+    scanf(" %[^\n]", nouveau_date);
+    if (strlen(nouveau_date) > 0) {
+        strcpy(taches[index].date, nouveau_date);
+    }
+
+    int input_priorite;
+    printf("Nouvelle priorité (1 pour HIGH, 0 pour LOW) : ");
+    scanf("%d", &input_priorite);
+    if (input_priorite == 1) {
+        taches[index].priorite = HIGH; 
+    } else if (input_priorite == 0) {
+        taches[index].priorite = LOW;
+    }
+
+    int input_statut;
+    printf("Nouveau statut (1 pour COMPLET, 0 pour INCOMPLET) : ");
+    scanf("%d", &input_statut);
+    if (input_statut == 1) {
+        taches[index].statut = COMPLET;
+    } else if (input_statut == 0) {
+        taches[index].statut = INCOMPLET;
+    }
+    
+    printf("Tâche modifiée avec succès.\n");
+}
+
+void supprimer_tache() {
+    int index;
+    afficher_taches();
+    printf("Entrez le numéro de la tâche à supprimer : ");
+    scanf("%d", &index);
+    
+    if (index < 1 || index > compteur_taches) {
+        printf("Numéro de tâche invalide.\n");
+        return;
+    }
+    
+    index--;
+    for (int i = index; i < compteur_taches - 1; i++) {
+        taches[i] = taches[i + 1];
+    }
+    compteur_taches--;
+    printf("Tâche supprimée avec succès.\n");
+}
+
+void filtrer_taches() {
+    int input_priorite;
+    printf("Filtrer par priorité (1 pour HIGH, 0 pour LOW) : ");
+    scanf("%d", &input_priorite);
+    Priorite priorite_filtre = (input_priorite == 1) ? HIGH : LOW;
+
+    printf("\n=== Tâches Filtrées ===\n");
+    for (int i = 0; i < compteur_taches; i++) {
+        if (taches[i].priorite == priorite_filtre) {
+            printf("Tâche %d :\n", i + 1);
+            printf("  Titre : %s\n", taches[i].titre);
+            printf("  Description : %s\n", taches[i].description);
+            printf("  Date d'échéance : %s\n", taches[i].date);
+            printf("  Priorité : %s\n", taches[i].priorite == HIGH ? "HIGH" : "LOW");
+            printf("  Statut : %s\n", taches[i].statut == COMPLET ? "COMPLET" : "INCOMPLET");
+        }
+    }    
+}
+
+void trier_taches() {
+    for (int i = 0; i < compteur_taches - 1; i++) {
+        for (int j = 0; j < compteur_taches - i - 1; j++) {
+            if (strcmp(taches[j].date, taches[j + 1].date) > 0) {
+                Tache temp = taches[j];
+                taches[j] = taches[j + 1];
+                taches[j + 1] = temp;
+            }
+        }
+    }
+    printf("Tâches triées par date avec succès.\n");
+}
+
+void sauvegarder_donnees() {
+    FILE *f = fopen("taches.txt", "w");
+    if (f == NULL) {
+        printf("Erreur lors de l'ouverture du fichier.\n");
+        return;
+    }
+    for (int i = 0; i < compteur_taches; i++) {
+        fprintf(f, "%s\n%s\n%s\n%d\n%d\n",
+            taches[i].titre,
+            taches[i].description,
+            taches[i].date,
+            taches[i].priorite,
+            taches[i].statut);
+    }
+    fclose(f);
+    printf("Données sauvegardées avec succès dans taches.txt.\n");
+}
 
