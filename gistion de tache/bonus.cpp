@@ -171,4 +171,23 @@ void modifier_tache(){
 	}
 	printf("Tache modifie avec succes .\n");
 }
+void supprimer_tache(){
+	int index;
+	afficher_taches();
+	printf("Entre le nemuro de tache a supprimer:");
+	scanf("%d", &index);
+	
+	if(index < 1 || index > compteur_taches){
+		printf("Numero de tache invalide ");
+		return;
+	}	
+	
+	index--;
+	for(int i = index ; i < compteur_tahes - 1){
+		taches[i] = taches[i + 1];
+	}
+	compteur_taches--;
+	printf("tache supprimer avec succe.\n");
+	
+}
 
