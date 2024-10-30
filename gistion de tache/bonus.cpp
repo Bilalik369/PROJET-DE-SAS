@@ -34,6 +34,8 @@ void sauvegarder_donnees(); // declaration de la nouvelle fonction sauvegarde de
 
 int main(){
 	
+	
+	
 	int choix;
 	
 	do{
@@ -52,8 +54,17 @@ int main(){
 			break;
 			case 5: filtrer_taches;
 			break;
+			case 6: trier_taches; // option paur trier les taches
+			break;
+			case 7: sauvegarder_donnees; // option paur sauvgarde les donnes 
+			break;
+			case 8: printf("Au revoir :\n");
+			default: printf("Choix invalide !\n");
 			
-		}
+			
+		}while (choix != 8);
+		return 0;
+		
 	}
 }
 
