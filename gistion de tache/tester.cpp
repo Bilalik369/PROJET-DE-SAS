@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-
 #define MAX_TACHE 100
 #define TITRE_LONGUEUR 100
 #define MAX_DESCRIPTION 500
@@ -27,16 +26,13 @@ void afficher_taches();
 void modifier_tache();
 void supprimer_tache();
 void filtrer_taches();
-void trier_taches();   // déclaration de la nouvelle fonction pour trier les tâches 
+void trier_taches();
 void afficher_menu();
-void sauvegarder_donnees(); // déclaration de la nouvelle fonction de sauvegarde des données 
+void sauvegarder_donnees();
+bool est_date_valide(const char *date);
 
-bool est_date_valide(const char *date); // declare un fanction qui verfier un si une date fournie sous forme de chaine de caractaire 
-
-  
 int main() {
     int choix;
-
     do {
         afficher_menu();
         printf("Choisir une option: ");
@@ -48,8 +44,8 @@ int main() {
             case 3: modifier_tache(); break;
             case 4: supprimer_tache(); break;
             case 5: filtrer_taches(); break;
-            case 6: trier_taches(); break; // option pour trier les tâches
-            case 7: sauvegarder_donnees(); break; // option pour sauvegarder les données 
+            case 6: trier_taches(); break; 
+            case 7: sauvegarder_donnees(); break; 
             case 8: printf("Au revoir :\n"); break;
             default: printf("Choix invalide !\n");
         }
@@ -70,17 +66,22 @@ void afficher_menu() {
     printf("8. Quitter \n");
 }
 
-
-bool est_date_valide(const char *date) { // Fonction de validation de date :
+bool est_date_valide(const char *date) {
     int annee, mois, jour;
-    if (sscanf(date, "%d-%d-%d", &annee, &mois, &jour) != 3) {// Utilise de sscanf  pour lire des données à partir d'une chaîne de caractère
+    if (sscanf(date, "%d-%d-%d", &annee, &mois, &jour) != 3) {
         return false;
     }
-    if (mois < 1 || mois > 12 || jour < 1 || jour > 31) {
+    // Vérification du mois
+    if (mois < 1 || mois > 12) {
         return false;
     }
+    // Vérification des jours
+    if (jour < 1 || jour > 31) {
+        return false;
+    }
+    // Vérification des jours par mois
     if (mois == 2) { // Février
-        if ((annee % 4 == 0 && annee % 100 != 0) || (annee % 400 == 0)) { // annee 	
+        if ((annee % 4 == 0 && annee % 100 != 0) || (annee % 400 == 0)) { // Année bissextile
             if (jour > 29) return false;
         } else {
             if (jour > 28) return false;
@@ -90,8 +91,6 @@ bool est_date_valide(const char *date) { // Fonction de validation de date :
     }
     return true;
 }
-
-
 
 void ajouter_tache() {
     if (compteur_taches >= MAX_TACHE) {
@@ -105,12 +104,12 @@ void ajouter_tache() {
     scanf(" %[^\n]", nouvelle_tache.description);
     
     do {
-    printf("Date d'échéance (YYYY-MM-DD) : ");
-    scanf(" %[^\n]", nouvelle_tache.date);
-    if(!est_date_valide(nouvelle_tache.date)){ // appelle la fonction est_date_valide, qui vérifie si la date saisie respecte le format (YYYY-MM-DD)
-    	printf("Date invalide, veuillez réessayer.\n");
-	}
-    }while (!est_date_valide(nouvelle_tache.date)); //  Tant que la date saisie est invalide, la boucle se repete, 
+        printf("Date d'échéance (YYYY-MM-DD) : ");
+        scanf(" %[^\n]", nouvelle_tache.date);
+        if (!est_date_valide(nouvelle_tache.date)) {
+            printf("Date invalide, veuillez réessayer.\n");
+        }
+    } while (!est_date_valide(nouvelle_tache.date));
     
     int input_priorite;
     printf("Priorité (1 pour HIGH, 0 pour LOW) : ");
